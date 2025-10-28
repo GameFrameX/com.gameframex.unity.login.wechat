@@ -1,0 +1,19 @@
+{
+  "name": "GameFrameX.Login.WeChat.Editor",
+  "references": [
+    "GameFrameX.Editor",
+    "GameFrameX.Runtime",
+    "GameFrameX.Login.WeChat.Runtime"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

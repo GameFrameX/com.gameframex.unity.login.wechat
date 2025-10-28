@@ -1,0 +1,18 @@
+{
+  "name": "GameFrameX.Login.WeChat.Runtime",
+  "rootNamespace": "GameFrameX.Login.WeChat.Runtime",
+  "references": [
+    "GameFrameX.Runtime",
+    "GameFrameX.Event.Runtime",
+    "GameFrameX.ShareSdk.Runtime"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}
