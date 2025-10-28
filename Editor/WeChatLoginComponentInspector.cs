@@ -23,7 +23,7 @@ namespace GameFrameX.Login.WeChat.Editor
             serializedObject.Update();
             EditorGUI.BeginDisabledGroup(EditorApplication.isPlayingOrWillChangePlaymode);
             {
-                EditorGUILayout.HelpBox("必须为Google 的Web Client ID", MessageType.Warning);
+                EditorGUILayout.HelpBox("从 https://developers.weixin.qq.com/platform 获取 App Id 和 App Key", MessageType.Warning);
                 EditorGUILayout.PropertyField(m_AppId);
                 EditorGUILayout.PropertyField(m_AppKey);
             }
