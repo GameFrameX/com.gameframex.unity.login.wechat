@@ -50,10 +50,16 @@ namespace GameFrameX.Login.WeChat.Runtime
 
         private EventComponent _eventComponent;
         private ShareSDK _shareSDK;
+        private bool _isInit;
 
         [UnityEngine.Scripting.Preserve]
         public void Init(string appId, string appKey)
         {
+            if (_isInit)
+            {
+                return;
+            }
+
             _eventComponent = GameEntry.GetComponent<EventComponent>();
             _eventComponent.CheckSubscribe(AuthEventArgs.EventId, OnAuthEventArgs);
             _shareSDK = Object.FindObjectOfType<ShareSDK>();
@@ -65,6 +71,7 @@ namespace GameFrameX.Login.WeChat.Runtime
 
             _shareSDK.devInfo.wechatMoments.AppId = appId;
             _shareSDK.devInfo.wechatMoments.AppSecret = appKey;
+            _isInit = true;
         }
 
         private void OnAuthEventArgs(object sender, GameEventArgs e)
