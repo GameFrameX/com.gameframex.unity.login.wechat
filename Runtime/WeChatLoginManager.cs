@@ -149,7 +149,7 @@ namespace GameFrameX.Login.WeChat.Runtime
             _loginSuccess = loginSuccess;
             _loginFail = loginFail;
 #if UNITY_EDITOR
-            _loginSuccess?.Invoke(new WeChatLoginSuccess() { NickName = "test", OpenId = SystemInfo.deviceUniqueIdentifier, PhotoUrl = "test", UnionId = SystemInfo.deviceUniqueIdentifier });
+            _loginSuccess?.Invoke(new WeChatLoginSuccess() { NickName = "test", OpenId = SystemInfo.deviceUniqueIdentifier, UserId = SystemInfo.deviceUniqueIdentifier, Token = "test", PhotoUrl = "test", UnionId = SystemInfo.deviceUniqueIdentifier });
             return;
 #endif
             if (_shareSDK.IsAuthorized(PlatformType.WeChat))
