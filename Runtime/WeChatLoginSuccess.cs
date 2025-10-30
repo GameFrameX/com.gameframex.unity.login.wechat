@@ -38,19 +38,31 @@ namespace GameFrameX.Login.WeChat.Runtime
     public sealed class WeChatLoginSuccess
     {
         /// <summary>
-        /// NickName
+        /// UserID,用户唯一ID，不会为空
+        /// </summary>
+        [UnityEngine.Scripting.Preserve]
+        public string UserId { get; set; }
+
+        /// <summary>
+        /// Token
+        /// </summary>
+        [UnityEngine.Scripting.Preserve]
+        public string Token { get; set; }
+
+        /// <summary>
+        /// NickName，不会为空
         /// </summary>
         [UnityEngine.Scripting.Preserve]
         public string NickName { get; set; }
 
         /// <summary>
-        /// openid
+        /// openid,可能为空
         /// </summary>
         [UnityEngine.Scripting.Preserve]
         public string OpenId { get; set; }
 
         /// <summary>
-        /// UnionId
+        /// UnionId，可能为空
         /// </summary>
         [UnityEngine.Scripting.Preserve]
         public string UnionId { get; set; }
@@ -61,13 +73,9 @@ namespace GameFrameX.Login.WeChat.Runtime
         [UnityEngine.Scripting.Preserve]
         public string PhotoUrl { get; set; }
 
-        /// <summary>
-        /// 转换为字符串
-        /// </summary>
-        /// <returns></returns>
         public override string ToString()
         {
-            return $"NickName：{NickName} UnionId：{UnionId} OpenId：{OpenId} PhotoUrl：{PhotoUrl}";
+            return $"NickName：{NickName} UnionId：{UnionId} OpenId：{OpenId} UserId：{UserId} Token：{Token} PhotoUrl：{PhotoUrl}";
         }
     }
 }

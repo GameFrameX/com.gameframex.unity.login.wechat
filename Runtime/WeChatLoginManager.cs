@@ -106,24 +106,34 @@ namespace GameFrameX.Login.WeChat.Runtime
             var weChatLoginSuccess = new WeChatLoginSuccess();
             if (authInfo != null)
             {
-                if (authInfo.ContainsKey("nickname"))
+                if (authInfo.ContainsKey("userName"))
                 {
-                    weChatLoginSuccess.NickName = authInfo["nickname"].ToString();
+                    weChatLoginSuccess.NickName = authInfo["userName"].ToString();
                 }
 
-                if (authInfo.ContainsKey("unionid"))
+                if (authInfo.ContainsKey("openID"))
                 {
-                    weChatLoginSuccess.UnionId = authInfo["unionid"].ToString();
+                    weChatLoginSuccess.OpenId = authInfo["openID"].ToString();
                 }
 
-                if (authInfo.ContainsKey("openid"))
+                if (authInfo.ContainsKey("unionID"))
                 {
-                    weChatLoginSuccess.OpenId = authInfo["openid"].ToString();
+                    weChatLoginSuccess.UnionId = authInfo["unionID"].ToString();
                 }
 
-                if (authInfo.ContainsKey("headimgurl"))
+                if (authInfo.ContainsKey("userIcon"))
                 {
-                    weChatLoginSuccess.PhotoUrl = authInfo["headimgurl"].ToString();
+                    weChatLoginSuccess.PhotoUrl = authInfo["userIcon"].ToString();
+                }
+
+                if (authInfo.ContainsKey("userID"))
+                {
+                    weChatLoginSuccess.UserId = authInfo["userID"].ToString();
+                }
+
+                if (authInfo.ContainsKey("token"))
+                {
+                    weChatLoginSuccess.Token = authInfo["token"].ToString();
                 }
             }
 
