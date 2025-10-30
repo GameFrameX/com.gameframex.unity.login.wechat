@@ -136,6 +136,8 @@ namespace GameFrameX.Login.WeChat.Runtime
             return;
 #endif
             _shareSDK.Authorize(PlatformType.WeChat);
+            var authInfo = _shareSDK.GetAuthInfo(PlatformType.WeChat);
+            Log.Debug(authInfo);
         }
 
         [UnityEngine.Scripting.Preserve]
