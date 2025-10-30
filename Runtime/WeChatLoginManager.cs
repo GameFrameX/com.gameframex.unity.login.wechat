@@ -90,39 +90,44 @@ namespace GameFrameX.Login.WeChat.Runtime
                         return;
                     }
 
-                    var weChatLoginSuccess = new WeChatLoginSuccess();
-                    var authInfo = _shareSDK.GetAuthInfo(PlatformType.WeChat);
-                    Log.Debug(authInfo);
-                    if (eventArgs.Data != null)
-                    {
-                        if (eventArgs.Data.ContainsKey("nickname"))
-                        {
-                            weChatLoginSuccess.NickName = eventArgs.Data["nickname"].ToString();
-                        }
-
-                        if (eventArgs.Data.ContainsKey("unionid"))
-                        {
-                            weChatLoginSuccess.UnionId = eventArgs.Data["unionid"].ToString();
-                        }
-
-                        if (eventArgs.Data.ContainsKey("openid"))
-                        {
-                            weChatLoginSuccess.OpenId = eventArgs.Data["openid"].ToString();
-                        }
-
-                        if (eventArgs.Data.ContainsKey("headimgurl"))
-                        {
-                            weChatLoginSuccess.PhotoUrl = eventArgs.Data["headimgurl"].ToString();
-                        }
-                    }
-
-                    _loginSuccess.Invoke(weChatLoginSuccess);
+                    Success();
                 }
                 else
                 {
                     _loginFail?.Invoke((int)eventArgs.State);
                 }
             }
+        }
+
+        private void Success()
+        {
+            Hashtable authInfo = _shareSDK.GetAuthInfo(PlatformType.WeChat);
+            Log.Debug(authInfo);
+            var weChatLoginSuccess = new WeChatLoginSuccess();
+            if (authInfo != null)
+            {
+                if (authInfo.ContainsKey("nickname"))
+                {
+                    weChatLoginSuccess.NickName = authInfo["nickname"].ToString();
+                }
+
+                if (authInfo.ContainsKey("unionid"))
+                {
+                    weChatLoginSuccess.UnionId = authInfo["unionid"].ToString();
+                }
+
+                if (authInfo.ContainsKey("openid"))
+                {
+                    weChatLoginSuccess.OpenId = authInfo["openid"].ToString();
+                }
+
+                if (authInfo.ContainsKey("headimgurl"))
+                {
+                    weChatLoginSuccess.PhotoUrl = authInfo["headimgurl"].ToString();
+                }
+            }
+
+            _loginSuccess?.Invoke(weChatLoginSuccess);
         }
 
         private Action<WeChatLoginSuccess> _loginSuccess;
@@ -137,9 +142,13 @@ namespace GameFrameX.Login.WeChat.Runtime
             _loginSuccess?.Invoke(new WeChatLoginSuccess() { NickName = "test", OpenId = SystemInfo.deviceUniqueIdentifier, PhotoUrl = "test", UnionId = SystemInfo.deviceUniqueIdentifier });
             return;
 #endif
+            if (_shareSDK.IsAuthorized(PlatformType.WeChat))
+            {
+                Success();
+                return;
+            }
+
             _shareSDK.Authorize(PlatformType.WeChat);
-            var authInfo = _shareSDK.GetAuthInfo(PlatformType.WeChat);
-            Log.Debug(authInfo);
         }
 
         [UnityEngine.Scripting.Preserve]
