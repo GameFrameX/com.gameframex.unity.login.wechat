@@ -85,32 +85,40 @@ namespace GameFrameX.Login.WeChat.Runtime
 
                 if (eventArgs.State == ResponseState.Success)
                 {
+                    if (_loginSuccess == null)
+                    {
+                        return;
+                    }
+
                     var weChatLoginSuccess = new WeChatLoginSuccess();
-                    if (eventArgs.Data.ContainsKey("nickname"))
+                    if (eventArgs.Data != null)
                     {
-                        weChatLoginSuccess.NickName = eventArgs.Data["nickname"].ToString();
-                    }
+                        if (eventArgs.Data.ContainsKey("nickname"))
+                        {
+                            weChatLoginSuccess.NickName = eventArgs.Data["nickname"].ToString();
+                        }
 
-                    if (eventArgs.Data.ContainsKey("unionid"))
-                    {
-                        weChatLoginSuccess.UnionId = eventArgs.Data["unionid"].ToString();
-                    }
+                        if (eventArgs.Data.ContainsKey("unionid"))
+                        {
+                            weChatLoginSuccess.UnionId = eventArgs.Data["unionid"].ToString();
+                        }
 
-                    if (eventArgs.Data.ContainsKey("openid"))
-                    {
-                        weChatLoginSuccess.OpenId = eventArgs.Data["openid"].ToString();
-                    }
+                        if (eventArgs.Data.ContainsKey("openid"))
+                        {
+                            weChatLoginSuccess.OpenId = eventArgs.Data["openid"].ToString();
+                        }
 
-                    if (eventArgs.Data.ContainsKey("headimgurl"))
-                    {
-                        weChatLoginSuccess.PhotoUrl = eventArgs.Data["headimgurl"].ToString();
+                        if (eventArgs.Data.ContainsKey("headimgurl"))
+                        {
+                            weChatLoginSuccess.PhotoUrl = eventArgs.Data["headimgurl"].ToString();
+                        }
                     }
 
                     _loginSuccess.Invoke(weChatLoginSuccess);
                 }
                 else
                 {
-                    _loginFail.Invoke((int)eventArgs.State);
+                    _loginFail?.Invoke((int)eventArgs.State);
                 }
             }
         }
