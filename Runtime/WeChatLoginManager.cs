@@ -91,6 +91,8 @@ namespace GameFrameX.Login.WeChat.Runtime
                     }
 
                     var weChatLoginSuccess = new WeChatLoginSuccess();
+                    var authInfo = _shareSDK.GetAuthInfo(PlatformType.WeChat);
+                    Log.Debug(authInfo);
                     if (eventArgs.Data != null)
                     {
                         if (eventArgs.Data.ContainsKey("nickname"))
