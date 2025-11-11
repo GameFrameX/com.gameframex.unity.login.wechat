@@ -41,7 +41,7 @@ namespace GameFrameX.Login.WeChat.Runtime
     /// </summary>
     [DisallowMultipleComponent]
     [RequireComponent(typeof(GameFrameXWeChatLoginCroppingHelper))]
-    [AddComponentMenu("Game Framework/WeChat Login")]
+    [AddComponentMenu("GameFrameX/WeChat Login")]
     [UnityEngine.Scripting.Preserve]
     public class WeChatLoginComponent : GameFrameworkComponent, IMopShareSDKHandler
     {
