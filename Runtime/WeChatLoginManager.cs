@@ -63,6 +63,7 @@ namespace GameFrameX.Login.WeChat.Runtime
             _eventComponent = GameEntry.GetComponent<EventComponent>();
             _eventComponent.CheckSubscribe(AuthEventArgs.EventId, OnAuthEventArgs);
             _shareSDK = Object.FindObjectOfType<ShareSDK>();
+#if UNITY_ANDROID
             _shareSDK.devInfo.wechat.AppId = appId;
             _shareSDK.devInfo.wechat.AppSecret = appKey;
 
@@ -71,6 +72,17 @@ namespace GameFrameX.Login.WeChat.Runtime
 
             _shareSDK.devInfo.wechatMoments.AppId = appId;
             _shareSDK.devInfo.wechatMoments.AppSecret = appKey;
+#endif
+#if UNITY_IOS || UNITY_IPHONE
+            _shareSDK.devInfo.wechat.app_id = appId;
+            _shareSDK.devInfo.wechat.app_secret = appKey;
+
+            _shareSDK.devInfo.wechatFavorites.app_id = appId;
+            _shareSDK.devInfo.wechatFavorites.app_secret = appKey;
+
+            _shareSDK.devInfo.wechatMoments.app_id = appId;
+            _shareSDK.devInfo.wechatMoments.app_secret = appKey;
+#endif
             _isInit = true;
         }
 
