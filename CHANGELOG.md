@@ -1,3 +1,20 @@
+# [1.1.0](https://github.com/gameframex/com.gameframex.unity.login.wechat/compare/1.0.0...1.1.0) (2025-12-23)
+
+
+### Bug Fixes
+
+* **微信登录:** 在编辑器模式下添加缺失的UserId和Token字段 ([59ba6a7](https://github.com/gameframex/com.gameframex.unity.login.wechat/commit/59ba6a78ee2bbae48edf99288a78ac214aa74f2a))
+* **微信登录:** 添加iOS平台微信SDK配置支持 ([73626ec](https://github.com/gameframex/com.gameframex.unity.login.wechat/commit/73626ec86285fcaa37713ac51db7c3d61c6b78a7))
+* **微信登录:** 添加空引用检查并优化数据处理逻辑 ([dca4b8e](https://github.com/gameframex/com.gameframex.unity.login.wechat/commit/dca4b8efbbd1883bb0e04e84beb49c3cd2fe2ee9))
+
+
+### Features
+
+* **微信登录:** 实现IMopShareSDKHandler接口并添加初始化检查 ([4fc7e23](https://github.com/gameframex/com.gameframex.unity.login.wechat/commit/4fc7e23696184804e93c25662241ea06596c1816))
+* **微信登录:** 添加用户ID和Token字段并更新字段映射 ([3a45943](https://github.com/gameframex/com.gameframex.unity.login.wechat/commit/3a4594382ffe8d346ea6c08b850c70ebf037ff28))
+* **微信登录:** 添加获取微信授权信息的日志输出 ([a57d6d3](https://github.com/gameframex/com.gameframex.unity.login.wechat/commit/a57d6d342ae1f4e1d5c352cdd01cecd162dc50c8))
+* **微信登录:** 添加获取微信授权信息的日志输出 ([2eb0a23](https://github.com/gameframex/com.gameframex.unity.login.wechat/commit/2eb0a233c8f55c509fbf3ac15b1bb645652e8d4c))
+
 # Changelog
 
 
