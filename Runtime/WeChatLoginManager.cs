@@ -106,7 +106,7 @@ namespace GameFrameX.Login.WeChat.Runtime
                 }
                 else
                 {
-                    _loginFail?.Invoke((int)eventArgs.State);
+                    _loginFail?.Invoke(eventArgs.State.ToString());
                 }
             }
         }
@@ -153,10 +153,10 @@ namespace GameFrameX.Login.WeChat.Runtime
         }
 
         private Action<WeChatLoginSuccess> _loginSuccess;
-        private Action<int> _loginFail;
+        private Action<string> _loginFail;
 
         [UnityEngine.Scripting.Preserve]
-        public void Login(Action<WeChatLoginSuccess> loginSuccess, Action<int> loginFail)
+        public void Login(Action<WeChatLoginSuccess> loginSuccess, Action<string> loginFail)
         {
             _loginSuccess = loginSuccess;
             _loginFail = loginFail;
