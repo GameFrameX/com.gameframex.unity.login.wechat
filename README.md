@@ -1,82 +1,85 @@
-# GameFrameX.Login.WeChat 微信登录
+<div align="center">
+  <img src="https://download.alianblank.com/gameframex/gameframex_logo_320.png" alt="Game Frame X Logo" width="160" />
+</div>
 
-> GameFrameX.Login.WeChat 是 GameFrameX 框架的微信登录组件，基于 ShareSDK 授权，并通过 GameFrameX 事件系统返回登录结果。
+# Game Frame X WeChat Login
 
-## 功能
+[![GitHub release](https://img.shields.io/github/v/release/GameFrameX/com.gameframex.unity.login.wechat?style=flat-square)](https://github.com/GameFrameX/com.gameframex.unity.login.wechat/releases)
+[![License](https://img.shields.io/github/license/GameFrameX/com.gameframex.unity.login.wechat?style=flat-square)](https://github.com/GameFrameX/com.gameframex.unity.login.wechat/blob/main/LICENSE.md)
+[![Documentation](https://img.shields.io/badge/Documentation-Online-blue?style=flat-square)](https://gameframex.doc.alianblank.com)
 
-- `初始化`
-- `登录`
-- `登出`
+**All-in-One Solution for Indie Game Development · Empowering Indie Developers' Dreams**
 
-## 安装与依赖
+[Documentation](https://gameframex.doc.alianblank.com) · [Quick Start](#quick-start) · [QQ Group](https://qm.qq.com/q/5s5e1e6e6e)
 
-- 包名：`com.gameframex.unity.login.wechat`（UPM Git：`https://github.com/gameframex/com.gameframex.unity.login.wechat.git`）
-- 依赖：`com.gameframex.unity >= 1.1.1`
-- 插件：需要集成 `cn.sharesdk.unity3d`（ShareSDK）并在场景中存在 `ShareSDK` 组件。
+**Language**: **English** | [简体中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
 
-## 使用方法
+---
 
-1.  挂载组件
-    - 在 `GameEntry` 上挂载 `WeChatLoginComponent` 组件。
-    - 确保 `GameEntry` 上已挂载 `EventComponent`（用于接收授权事件）。
-    - 在场景中添加并配置 `ShareSDK` 组件（来自 `cn.sharesdk.unity3d`）。
+## Project Overview
 
-2.  设置参数
-    - 在 `WeChatLoginComponent` 的检视器中设置：
-      - `AppId`：微信开放平台应用的 `AppID`
-      - `AppKey`：微信开放平台应用的 `AppSecret`
+Game Frame X WeChat Login is a WeChat login component for the GameFrameX framework, based on ShareSDK authorization, returning login results through the GameFrameX event system.
 
-3.  调用方法
-    ```csharp
-    using GameFrameX.Login.WeChat.Runtime;
+## Quick Start
 
-    // 获取微信登录组件
-    var weChatLoginComponent = GameEntry.GetComponent<WeChatLoginComponent>();
+### Installation
 
-    // 初始化（会将 AppId/AppKey 写入 ShareSDK 的 WeChat 配置）
-    weChatLoginComponent.Init();
+Choose one of the following methods:
 
-    // 登录
-    weChatLoginComponent.Login(
-        (weChatLoginSuccess) =>
-        {
-            Debug.Log($"登录成功! {weChatLoginSuccess.ToString()}");
-            // weChatLoginSuccess.NickName / UnionId / OpenId / PhotoUrl 可用
-        },
-        (code) =>
-        {
-            Debug.LogError($"登录失败! 响应码: {code}");
-        });
+1. Add the following to the `dependencies` section in your project's `manifest.json`:
+   ```json
+   {"com.gameframex.unity.login.wechat": "https://github.com/AlianBlank/com.gameframex.unity.login.wechat.git"}
+   ```
 
-    // 登出（取消授权）
-    weChatLoginComponent.LogOut();
-    ```
+2. Use `Git URL` in Unity's Package Manager:
+   ```
+   https://github.com/AlianBlank/com.gameframex.unity.login.wechat.git
+   ```
 
-## 返回数据结构
+3. Download the repository and place it in your Unity project's `Packages` directory. It will be loaded automatically.
 
-- 类型：`WeChatLoginSuccess`
-  - `NickName`：微信昵称
-  - `OpenId`：用户 `OpenID`
-  - `UnionId`：用户 `UnionID`
-  - `PhotoUrl`：头像地址
+## Usage Examples
 
-登录失败时的 `code` 为 ShareSDK 的 `ResponseState` 枚举对应值（`cn.sharesdk.unity3d.ResponseState`），用于判断失败原因。
+1. Attach the `WeChatLoginComponent` to the `GameEntry` object.
+2. Ensure `EventComponent` is also attached to `GameEntry` (for receiving authorization events).
+3. Add and configure a `ShareSDK` component in the scene (from `cn.sharesdk.unity3d`).
+4. Set `AppId` and `AppKey` (WeChat AppSecret) in the `WeChatLoginComponent` Inspector.
+5. Call the methods:
 
-## 平台配置提示
+```csharp
+// Get WeChat login component
+var weChatLoginComponent = GameEntry.GetComponent<WeChatLoginComponent>();
 
-- 请按 ShareSDK 官方文档完成微信登录的 Android/iOS 平台配置（注册应用、签名/包名、URL Scheme/通用链接等）。
-- 组件在运行时会将 `AppId` 与 `AppSecret` 填充到 ShareSDK 的 `wechat / wechatFavorites / wechatMoments` 配置，无需在 ShareSDK Inspector 手动重复填写。
-- 场景中必须存在 `ShareSDK` 组件，否则无法授权。
+// Initialize (writes AppId/AppKey to ShareSDK's WeChat config)
+weChatLoginComponent.Init();
 
-## 组件与模块
+// Login
+weChatLoginComponent.Login(
+    (weChatLoginSuccess) =>
+    {
+        Debug.Log($"Login successful! {weChatLoginSuccess.ToString()}");
+        // weChatLoginSuccess.NickName / UnionId / OpenId / PhotoUrl available
+    },
+    (code) =>
+    {
+        Debug.LogError($"Login failed! Response code: {code}");
+    });
 
-- `WeChatLoginComponent`：对外组件，提供 `Init / Login / LogOut`。
-- `IWeChatLoginManager`：登录管理接口。
-- `WeChatLoginManager`：具体实现，订阅授权事件并回调结果。
-- `WeChatLoginSuccess`：登录成功数据结构。
-- `GameFrameXWeChatLoginCroppingHelper`：辅助保留类，供链接裁剪，用户无需配置。
+// Logout (cancel authorization)
+weChatLoginComponent.LogOut();
+```
 
-## 参考与文档
+## Dependencies
 
-- GameFrameX 文档：https://gameframex.doc.alianblank.com
-- 本包仓库：https://github.com/gameframex/com.gameframex.unity.login.wechat.git
+- `com.gameframex.unity`: GameFrameX core framework
+- `com.gameframex.unity.sharesdk`: ShareSDK integration
+
+## Documentation & Resources
+
+- Documentation: https://gameframex.doc.alianblank.com
+- Repository: https://github.com/GameFrameX/com.gameframex.unity.login.wechat
+- Issues: https://github.com/GameFrameX/com.gameframex.unity.login.wechat/issues
+
+## License
+
+This project is licensed under the MIT License. See [LICENSE](LICENSE.md) for details.
